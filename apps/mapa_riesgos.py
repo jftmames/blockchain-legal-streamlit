@@ -25,7 +25,7 @@ CONTROLES = {
 def _heatmap(df):
     import plotly.express as px
     fig = px.density_heatmap(
-        df, x="Probabilidad", y="Impacto", z="Riesgo",
+        df, x="Probabilidad", y="Impacto", z="Score",
         histfunc="sum", nbinsx=5, nbinsy=5, range_x=[1,5], range_y=[1,5],
         color_continuous_scale="YlOrRd"
     )
@@ -49,7 +49,7 @@ def main(st=st):
 
     df = pd.DataFrame(data).sort_values("Score", ascending=False)
     st.dataframe(df, use_container_width=True)
-    st.plotly_chart(_heatmap(df.rename(columns={"Score":"Riesgo"})), use_container_width=True)
+    st.plotly_chart(_heatmap(df), use_container_width=True)
 
     top = df.iloc[0]
     st.info(f"**Prioritario:** {top['Riesgo']} · Score {int(top['Score'])} → Control sugerido: {top['Control']}")
