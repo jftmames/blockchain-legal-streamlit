@@ -5,3 +5,4 @@ plotly
 pycryptodome
 reportlab
 networkx
+tabulate
